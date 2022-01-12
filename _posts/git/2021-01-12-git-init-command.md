@@ -1,7 +1,7 @@
 ---
 title: "[Git] 기본 명령어"
 
-caterogies: 
+categories: 
   - git
 tags: 
   - git
