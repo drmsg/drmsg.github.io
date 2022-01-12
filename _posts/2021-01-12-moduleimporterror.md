@@ -1,12 +1,14 @@
 ---
-title: [Python] "ModuleNotFoundError: No module named", 상위 디렉토리 import, sys.path에서 insert와 append 차이
+title: "[Python] 'ModuleNotFoundError: No module named', 상위 디렉토리 import, sys.path에서 insert와 append 차이"
 
-excerpt: excerpt
-
-caterogies: - python
-tags: - [python], [module]
+caterogies: 
+- python
+tags: 
+- python
+- module
 
 toc: true
+toc_sticky: true
 
 date: 2021-01-12
 last_modified_at: 2021-01-12

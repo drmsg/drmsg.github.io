@@ -1,11 +1,13 @@
 ---
-title: [Git] 기본 명령어
-excerpt: excerpt
+title: "[Git] 기본 명령어"
 
-caterogies: - git
-tags: -[git]
+caterogies: 
+  - git
+tags: 
+  - git
 
 toc: true
+toc_sticky: true
 
 date: 2021-01-12
 last_modified_at: 2021-01-12
