@@ -12,8 +12,7 @@ tags:
 toc: true
 toc_sticky: true
 
-date: 2021-01-12
-last_modified_at: 2021-01-12
+date: 2022-01-12
 ---
 
 ### ModuleNotFoundError: No module named
@@ -38,15 +37,16 @@ parent_dir/
 from os import path
 
 # 현재 위치
-path.abspath('.')	
+path.abspath('.')		# or path.abspath(''), 
+  # >> '/~/parent_dir/child_dir'
 
 # 상위 폴더 위치
 path.abspath('..')
+  # >> '/~/parent_dir/'
 
 # 두 단계 상위 폴더 위치
-path.abspath('../..')
-# or
-path.dirname(path.abspath('..')
+path.abspath('../..')	# or path.dirname(path.abspath('..')
+  # >> '/~'
 
 ```
 ---
@@ -56,13 +56,12 @@ path.dirname(path.abspath('..')
 추가하지 않은 상태에서 ```sys.path```를 출력해보면 현재 디렉토리가 가장 처음에 들어있는 리스트가 나온다.
 ```python
 import sys
-
 sys.path
 # >> ['~/parent_dir/child_dir',...,'~/lib/python3.9',...,'~/lib/python3.9/site-packages',...]
 ```
+&nbsp;
 
 append 사용 시 추가한 디렉터리는 리스트 가장 끝에 들어가며 insert 사용 시 지정한 위치에 끼워 넣어진다.
-
 
 ```python
 sys.path.append(path.abspath('..'))
@@ -74,6 +73,7 @@ sys.path.insert(1,path.abspath('..'))
 sys.path.insert(0,path.abspath('..'))
 # >> ['~/parent_dir,'~/parent_dir/child_dir',...]
 ```
+&nbsp;
 
 import할 module을 찾을 때 sys.path 리스트 내의 순서대로 찾기 때문에 같은 이름의 module이 있다면 결과가 달라 질 수 있다. 만약 아래와 같이 module.py가 child_dir 안에도 들어있다고 한다면 insert 방법에 따라 결과가 달라질 수 있다.
 
@@ -81,19 +81,24 @@ import할 module을 찾을 때 sys.path 리스트 내의 순서대로 찾기 때
 parent_dir/
   child_dir/
     run.py
-    module.py
-  module.py
+    module.py	
+  module.py	
 ```
 
-```
+```python
 sys.path.insert(0,path.abspath('..'))
 import module
 # >> parent_dir의 module이 import
 ```
 
-```
+```python
 sys.path.append(path.abspath('..')) # or sys.path.insert(1,path.abspath('..'))
 import module
 # >> child_dir의 module이 import
+```
+&nbsp; 
 
+원치 않는 path를 제거하고 싶을 때는 remove를 사용하면 된다.
+```python
+sys.path.remove("abspath of dir")
 ```

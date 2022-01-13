@@ -19,7 +19,7 @@ html {
   }
 
   @include breakpoint($x-large) {
-    font-size: 22px;
+    font-size: 18px;  //defalt 22, 전체 글씨 비율이 바뀜
   }
 
   -webkit-text-size-adjust: 100%;
