@@ -41,6 +41,23 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+
+        <span class="nav__sub-title", style="font-size:1em"> Etc </span>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "github-page" %}
+                        <li><a href="/category/github-page" class=""> github-page ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Programmers" %}
+                        <li><a href="/category/programmers" class="">프로그래머스 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            
       </li>
   </ul>
 </nav>

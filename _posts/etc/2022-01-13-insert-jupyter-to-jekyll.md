@@ -3,7 +3,7 @@ permalink: /insert-jupyter-to-jekyll
 title: "[Jekyll] post에 jupyter notebook 넣기"
 
 categories: 
-  - "githubpage"
+  - "github-page"
 tags: 
   - jupyter
   - notebook
@@ -13,6 +13,8 @@ tags:
 toc: true
 toc_sticky: true
 
+comments: true
+
 date: 2022-01-13
 ---
 > **한 줄 요약: iframe 안에 html을 넣으면 된다.**
@@ -21,17 +23,23 @@ date: 2022-01-13
 
 ---
 ### Simple 3 Step
-이는 가장 쉽게 해결할 수 있는 방법이나, 좀 더 깔끔하게 하게 해결하고 싶다면 글 마지막의 최종 버젼을 보면 된다.
+이는 가장 쉽게 해결할 수 있는 방법이다. 좀 더 깔끔하게 하게 해결하고 싶다면 글 마지막의 최종 버젼을 보면 된다.
 
 **Step1. jupyter notebook file을 html로 변환 (두 가지 중 하나 선택)**
 - jupyter notebook > menu > file > download as > HTML(.html)  
 
 - juypter file을 ``` jupyter nbconvert --to html <jupyter_file(.ipynb)> ``` 을 이용하여 html로 변환
 
+&nbsp;
+
 **Step2. 변경한 html을 assets 폴더에 넣기**
 - assets 폴더 내에 jupyter-notebooks 폴더(이건 개인 설정이다)를 만들고 html 넣는다.
 
+&nbsp;
+
 **Step3. post markdown 문서 내에 html 불러오기**
+- 본문에 아래 코드를 붙여넣는다.
+
 ```html
 <script>
   function resizeIframe(obj) {
@@ -53,9 +61,7 @@ frameborder="0" width="100%" scrolling="no" onload="resizeIframe(this)" ></ifram
   }
 </script>
 
-><iframe src="{{'/assets/jupyter-notebooks/2022-01-13-test2' | relative_url}}" 
->frameborder="0" width="100%" scrolling="no" onload="resizeIframe(this)" ></iframe>
-
+<iframe src="{{'/assets/jupyter-notebooks/2022-01-13-test2' | relative_url}}" frameborder="0" width="100%" scrolling="no" onload="resizeIframe(this)" ></iframe>
 
 ---
 ### 개발과정
@@ -78,13 +84,19 @@ print('hello world')
 
   - 많은 블로그들에서 이 방법을 사용하고 있지만 code와 result를 구분하기 어렵다.
 
+&nbsp;
+
 **방법2. css와 "```<inframe>```" 태그 이용하기**
 - ref: https://seungwubaek.github.io/blog/tips/jupyter_to_html/
 - 인터넷에서 찾은 방법 중 가장 자세한 설명이며, 복잡하지만 원하는 방향의 결과물을 보여주었다.
 
+&nbsp;
+
 **방법3. Custom layout 만든 후  적용**
 - ref: http://www.kasimte.com/adding-and-including-jupyter-notebooks-as-jekyll-blog-posts
 - html로 변경 후 custom layout을 입히면 된다는 간단한 개념이나 결과물이나 custom layout을 알려주지 않았다.
+
+&nbsp;
 
 **방법4. 복합**
 - ref: https://www.linode.com/docs/guides/jupyter-notebook-on-jekyll/#install-ruby-and-jekyll
@@ -128,16 +140,19 @@ print('hello world')
 </div>
 </details>
 
-
-
-
-
 ---
+
+&nbsp;
+
 ---
 ### 최종 버젼
 
 **Step1. jupyter notebook to html**
-- 위와 동일
+- jupyter notebook > menu > file > download as > HTML(.html)  or
+
+- ``` jupyter nbconvert --to html <jupyter_file(.ipynb)> ```
+
+&nbsp;
 
 **Step2. layout 만들기**
 
@@ -168,16 +183,15 @@ print('hello world')
 
 ```html
 {{"{{"}} content }}
-
-<script>
-  function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
-  }
-</script>
 ```
 
-**Step3. body.html에 layout 적용
-1)  /assets/jupyter-notebooks 폴더에 html 파일을 만든 후 앞에서 짤라냈던 또는 새롭게 얻은 ```<body>``` 코드를 붙여 넣는다.
+&nbsp;
+
+**Step3. body.md 만들기**
+
+1)  /assets/jupyter-notebooks 폴더에 .md 파일을 만든 후 앞에서 짤라냈던 또는 새롭게 얻은 ```<body>``` 코드를 붙여 넣는다. (앞 뒤 ```<body class= ...>``` ```</body>```는 제거)
+
+> html 파일을 만들어도 상관없지만 markdown 파일을 만들면 ```<div>```사이에 markdown 문서를 자유롭게 삽입 수정할 수 있다.
 
 2) 가장 상단에 ```layout: notebook-html``` 머릿말을 붙인다.
 
@@ -186,23 +200,35 @@ print('hello world')
 layout: notebook-html
 ---
 
-<body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
+<div class="jp-Cell-inputWrapper">
 ...
-
+</div>
 ```
+
+&nbsp;
 
 **Step4. iframe으로 post에 넣기**
 - 원하는 위치에 아래 코드를 넣으면 완성
 
 ```html
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+  }
+</script>
 <iframe src= "{{"{{"}}'/assets/jupyter-notebooks/file' | relative_url }}" 
 frameborder="0" width="100%" scrolling="no" onload="resizeIframe(this)" ></iframe>
 ```
 
+>```resizeIframe``` script를 본문에 사용할 layout 파일(minimal mistake에서는 _layouts/single.html)에 넣으면 본문에서는 생략해도 된다. layout 파일에서 {{"{{"}} content }} 앞부분에 붙여 넣자.
+
+&nbsp;
+
 **Step5. body 추출 자동화 코드**
-- extract 폴더를 만들고 폴더 안에 jupyter_html_body_extract.py 파일을 만든 후 아래 코드를 넣는다.
+- extract 폴더를 만들고 폴더 안에 아래와 같이 파이썬 파일을 만든다.
 
 ```python
+jupyter_html_body_extract.py
 import os
 def change_jupyter_to_html(file):
     os.system(f'jupyter nbconvert --to html {file}')
@@ -220,7 +246,7 @@ def extract_body_from_html(html_file):
         if len(index_lines) == 2:
             start_index = lines.index(index_lines[0])
             last_index = lines.index(index_lines[1])
-            body_lines = lines[start_index:last_index+1]
+            body_lines = lines[start_index+1:last_index]
         else:
             print('error')
             body_lines = []
@@ -243,8 +269,11 @@ for file in file_list:
         change_jupyter_to_html(file)
         html_file = file.replace('.ipynb','.html')
         extract_body_from_html(html_file)
+        os.rename(html_file, html_file.replace(".html",".md"))
 ```
-- extract 폴더 내에 jupyter notebook 파일을 넣고 파이썬 파일을 실행 시키면 같은 폴더 내에 같은 이름의 html 파일이 생성되며 이 안에는 머리말과 html의 body가 들어있는 것을 확인 할 수 있다.
+- extract 폴더 내에 jupyter notebook 파일을 넣고 파이썬 파일을 실행 시키면 같은 폴더 내에 같은 이름의 md 파일이 생성되며 이 안에는 머리말과 html의 body가 들어있는 것을 확인 할 수 있다.
+
+&nbsp;
 
 ---
 **추가**
@@ -260,4 +289,4 @@ frameborder="0" width="100%" scrolling="no" onload="resizeIframe(this)" ></ifram
 
 - 예시의 그래프가 간단한 모양이어서 일 수도 있지만, 저장해서 올리는 것에 비해 크게 차이가 나지 않는 것을 볼 수 있다.
 - 간단한 notebook을 올릴 때는 번거러움을 감수하고 image 파일을 따로 올릴 필요는 없겠다. 
-- 넣고 싶다면 ```<img src="binary code">```에서 binary code 대신 image url을 넣자.
+- 넣고 싶다면 html 파일 내 ```<img src="binary code">```에서 binary code 대신 image url을 넣자.

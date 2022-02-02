@@ -102,3 +102,14 @@ import module
 ```python
 sys.path.remove("abspath of dir")
 ```
+
+&nbsp;
+
+---
+만약 ```sys.path```에 상대경로 ```''```이 들어가 있다면 ```os.chdir```를 통해 절대 경로를 변경해 줄 수 있다.
+
+child_dir에서 시행 시 상대경로 ```''```에 대해 절대경로는 ```~/parent_dir/child_dir``` 이다. 아래 코드를 실행 시키고 나면 절대경로가 ```~/parent_dir``` 으로 바뀌게 된다. 이는 ```os.getcwd()```로 확인할 수 있다.
+
+```python
+os.chdir(os.path.abspath('..'))
+```

@@ -15,7 +15,7 @@ def extract_body_from_html(html_file):
         if len(index_lines) == 2:
             start_index = lines.index(index_lines[0])
             last_index = lines.index(index_lines[1])
-            body_lines = lines[start_index:last_index+1]
+            body_lines = lines[start_index+1:last_index]
         else:
             print('error')
             body_lines = []
@@ -33,8 +33,9 @@ cur_dir = os.path.dirname(os.path.abspath(__file__))
 file_list = os.listdir(cur_dir)
 print(file_list)
 for file in file_list:
-    if ".ipynb" in file:
+    if file.rfind(".ipynb") + 6 == len(file):
         file = f'{cur_dir}/{file}'
         change_jupyter_to_html(file)
         html_file = file.replace('.ipynb','.html')
         extract_body_from_html(html_file)
+        os.rename(html_file, html_file.replace(".html",".md"))
