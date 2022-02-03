@@ -1,9 +1,9 @@
 ---
 permalink: /learn-iterm
-title: "[개발환경세팅] iterm 사용하기"
+title: "[개발환경] iterm 터미널 설치 및 사용"
 
 categories: 
-  - "개발환경세팅"
+  - "개발환경"
 tags: 
   - macbook
   - iterm

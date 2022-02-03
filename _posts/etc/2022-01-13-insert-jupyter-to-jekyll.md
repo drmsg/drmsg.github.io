@@ -17,9 +17,7 @@ comments: true
 
 date: 2022-01-13
 ---
-> **한 줄 요약: iframe 안에 html을 넣으면 된다.**
-
-> **주의!!!: html, css를 처음 본 코린이가 결과만 나오면 된다는 신념으로 만든는 결과물 이므로 너무 믿지는 말자. 근데 된다?!**
+> **한 줄 요약: iframe으로 html을 넣으면 된다.**
 
 ---
 ### Simple 3 Step
@@ -67,9 +65,7 @@ frameborder="0" width="100%" scrolling="no" onload="resizeIframe(this)" ></ifram
 ### 개발과정
 코딩 공부를 위해 검색을 하다 보면 jupyter notebook을 포스트에 넣은 글들을 볼 수 있다. jupyter 화면을 캡쳐해서 넣은 포스트들에 비해 셸 형태 그대로 가져온 포스트들은 보기에도 좋을 뿐더러 코드를 복붙하기에도 좋았다. 
 
-나도 jupyter notebook을 포스트에 넣고 싶다는 목표가 생겼고, 누군가가 정리해놓은 방법을 가져오면 되겠지라는 안일한 마음가짐으로 시작한 일은....
-
-인터넷에서 찾은 방법들은 크게 4가지로 나누어 볼 수 있었다.
+인터넷에서 찾은 방법들은 크게 4가지로 나누어 볼 수 있다.
 
 **방법1. 기존 markdown 문법 사용하기**
 - jupyter file을 markdown으로 변경 후 포스트에 넣는 방법이다.
@@ -140,8 +136,6 @@ print('hello world')
 </div>
 </details>
 
----
-
 &nbsp;
 
 ---
@@ -150,7 +144,10 @@ print('hello world')
 **Step1. jupyter notebook to html**
 - jupyter notebook > menu > file > download as > HTML(.html)  or
 
-- ``` jupyter nbconvert --to html <jupyter_file(.ipynb)> ```
+- 
+``` 
+jupyter nbconvert --to html <jupyter_file(.ipynb)> 
+```
 
 &nbsp;
 

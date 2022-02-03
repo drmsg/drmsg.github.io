@@ -1,9 +1,9 @@
 ---
 permalink: /install-jekyll-on-M1
-title: "[개발환경세팅] M1에서 jekyll 설치하기"
+title: "[개발환경] M1에서 jekyll 설치하기"
 
 categories: 
-  - "개발환경세팅"
+  - "개발환경"
 tags: 
   - macbook
   - M1
