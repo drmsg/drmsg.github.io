@@ -228,7 +228,7 @@ frameborder="0" width="100%" scrolling="no" onload="resizeIframe(this)" ></ifram
 - extract 폴더를 만들고 폴더 안에 아래와 같이 파이썬 파일을 만든다.
 
 ```python
-jupyter_html_body_extract.py
+#jupyter_html_body_extract.py
 import os
 def change_jupyter_to_html(file):
     os.system(f'jupyter nbconvert --to html {file}')
